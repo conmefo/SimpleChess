@@ -1,13 +1,49 @@
 package com.conmefo.model.chess.core.model;
 
-import com.conmefo.model.chess.core.model.pieces.Piece;
+import com.conmefo.model.chess.core.model.pieces.*;
+
 
 public class Board {
     public final Piece[][] piece = new Piece[8][8];
     public Position isDoubleMovePosition = null;
 
+    public void initializeBoard(){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                piece[i][j] = null;
+            }
+        }
+
+        for (int i = 0; i < 8; i++) {
+            piece[1][i] = new Pawn(PieceColor.WHITE);
+            piece[6][i] = new Pawn(PieceColor.BLACK);
+        }
+
+        piece[0][0] = new Rook(PieceColor.WHITE, false);
+        piece[0][1] = new Knight(PieceColor.WHITE);
+        piece[0][2] = new Bishop(PieceColor.WHITE);
+        piece[0][3] = new Queen(PieceColor.WHITE);
+        piece[0][4] = new King(PieceColor.WHITE, false);
+        piece[0][5] = new Bishop(PieceColor.WHITE);
+        piece[0][6] = new Knight(PieceColor.WHITE);
+        piece[0][7] = new Rook(PieceColor.WHITE, false);
+
+        piece[7][0] = new Rook(PieceColor.BLACK, false);
+        piece[7][1] = new Knight(PieceColor.BLACK);
+        piece[7][2] = new Bishop(PieceColor.BLACK);
+        piece[7][3] = new Queen(PieceColor.BLACK);
+        piece[7][4] = new King(PieceColor.BLACK, false);
+        piece[7][5] = new Bishop(PieceColor.BLACK);
+        piece[7][6] = new Knight(PieceColor.BLACK);
+        piece[7][7] = new Rook(PieceColor.BLACK, false);
+    }
+
     public boolean isWithinBounds(Position position) {
         return position.row >= 0 && position.row < 8 && position.col >= 0 && position.col < 8;
+    }
+
+    public void setPiece(Position position, Piece piece) {
+        this.piece[position.row][position.col] = piece;
     }
 
     public Board copy(){
