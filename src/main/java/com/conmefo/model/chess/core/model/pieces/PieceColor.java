@@ -1,6 +1,6 @@
 package com.conmefo.model.chess.core.model.pieces;
 
-enum PieceColor {
+public enum PieceColor {
     WHITE,
     BLACK;
 

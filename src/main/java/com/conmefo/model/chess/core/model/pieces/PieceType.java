@@ -1,6 +1,6 @@
 package com.conmefo.model.chess.core.model.pieces;
 
-enum PieceType {
+public  enum PieceType {
     PAWN,
     ROOK,
     KNIGHT,
