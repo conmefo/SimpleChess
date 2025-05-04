@@ -9,9 +9,11 @@ import com.conmefo.model.chess.core.model.Position;
 public class Rook extends Piece {
     final int dx[] = { 1, -1, 0, 0 };
     final int dy[] = { 0, 0, 1, -1 };
+    public boolean hasMoved = false;
 
-    public Rook(PieceColor color) {
+    public Rook(PieceColor color, boolean hasMoved) {
         super(PieceType.ROOK, color);
+        this.hasMoved = hasMoved;
     }
 
     @Override

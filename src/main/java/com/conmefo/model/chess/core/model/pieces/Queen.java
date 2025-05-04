@@ -18,7 +18,7 @@ public class Queen extends Piece {
     public List<Position> getPsuedoLegalMoves(Position position, Board board) {
         List<Position> moves = new ArrayList<>();
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             int x = position.row;
             int y = position.col;
             while (true) {
