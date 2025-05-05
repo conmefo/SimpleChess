@@ -4,6 +4,10 @@ public enum PieceColor {
     WHITE,
     BLACK;
 
+    public String getDisplayName(){
+        return this == WHITE ? "White" : "Black";
+    }
+
     public boolean isWhite() {
         return this == WHITE;
     }
