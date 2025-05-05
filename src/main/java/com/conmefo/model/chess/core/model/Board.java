@@ -1,5 +1,7 @@
 package com.conmefo.model.chess.core.model;
 
+import java.io.PipedOutputStream;
+
 import com.conmefo.model.chess.core.model.pieces.*;
 
 
@@ -44,6 +46,49 @@ public class Board {
 
     public void setPiece(Position position, Piece piece) {
         this.piece[position.row][position.col] = piece;
+    }
+
+    public Piece getPiece(Position position) {
+        return piece[position.row][position.col];
+    }
+
+    public boolean checkEmpty (int row, int colFrom, int colTo){
+        for (int i = colFrom; i <= colTo; i++){
+            if (piece[row][i] != null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void simulateMove (Position from, Position to){
+        Piece curPiece = piece[from.row][from.col];
+
+        if (curPiece.type.isPawn() && piece[to.row][to.col] == null && Math.abs(from.col - to.col) == 1 && Math.abs(from.row - to.row) == 1){
+            piece[from.row][to.col] = null;
+        }
+
+        piece[to.row][to.col] = curPiece;
+        piece[from.row][from.col] = null;
+        
+        if (curPiece.type.isKing() && Math.abs(from.col - to.col) == 2){
+            // Castling move
+            if (to.col > from.col) {
+                // Move the rook to the new position
+                piece[to.row][to.col - 1] = piece[to.row][7];
+                piece[to.row][7] = null;
+            } else {
+                // Move the rook to the new position
+                piece[to.row][to.col + 1] = piece[to.row][0];
+                piece[to.row][0] = null;
+            } 
+        }
+
+        if (curPiece.type.isPawn() && Math.abs(from.row - to.row) == 2){
+            isDoubleMovePosition = to;
+        } else {
+            isDoubleMovePosition = null;
+        }
     }
 
     public Board copy(){
