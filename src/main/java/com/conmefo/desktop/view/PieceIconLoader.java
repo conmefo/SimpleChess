@@ -1,44 +1,23 @@
 package com.conmefo.desktop.view;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO; 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import com.conmefo.model.chess.core.model.pieces.Piece;
 
-public class PieceIconLoader {
-    private static final Map<String, ImageIcon> cache = new HashMap<>();
+public final class PieceIconLoader {
+   // private static final Map<String, BufferedImage> imageCache = new HashMap<>();
 
-    public static String buildFilenameKey(Piece piece) {
-        if (piece == null) {
-            return null;
-        }
-
-        String filenameKey = new String();
-        filenameKey = piece.color.getDisplayName() + piece.type.getDisplayName() + ".png";
-
-        return filenameKey.toString();
-    }
-
-    public static ImageIcon loadImages(Piece piece){
-        if (piece == null) {
-            return null;
-        }
-
-        String filenameKey = buildFilenameKey(piece);
-
-        if (cache.containsKey(filenameKey)) {
-            return cache.get(filenameKey);
-        }
-
-        String path = "/images/" + filenameKey;
-        ImageIcon icon = new ImageIcon(PieceIconLoader.class.getResource(path));
-        if (icon != null) {
-            cache.put(filenameKey, icon);
-            return icon;
-        }
-
-        return null;
-    }
+    public static BufferedImage loadImage(Piece piece) {
+		BufferedImage img = null;
+		//System.out.println("Loading image: " + imagePath);
+        String imagePath = "/images/" + piece.color.getDisplayName() + piece.type.getDisplayName() + ".png";
+		try {
+			img = ImageIO.read(PieceIconLoader.class.getResourceAsStream(imagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return img;
+	}
 }

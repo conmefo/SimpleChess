@@ -15,6 +15,7 @@ public class GameState {
         this.board = new Board();
         this.status = GameStatus.WHITE_TURN;
         this.currentTurn = PieceColor.WHITE;
+        board.initializeBoard();
     }
 
     public boolean attemptMove(Position from, Position to) {
