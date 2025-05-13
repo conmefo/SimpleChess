@@ -13,5 +13,6 @@ public class ChessApp {
         mainFrame.pack();
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
+        boardPanel.LaunchGame();
     }
 }

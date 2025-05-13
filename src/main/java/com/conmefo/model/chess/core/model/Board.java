@@ -8,8 +8,11 @@ import com.conmefo.model.chess.core.model.pieces.*;
 public class Board {
     public final Piece[][] piece = new Piece[8][8];
     public Position isDoubleMovePosition = null;
+    public static int whitePawnDir;
 
-    public void initializeBoard(){
+    public void initializeBoard(PieceColor color){
+        PieceColor oppColor = color.isWhite() ? PieceColor.BLACK : PieceColor.WHITE;
+       // if ()
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 piece[i][j] = null;
@@ -17,27 +20,27 @@ public class Board {
         }
 
         for (int i = 0; i < 8; i++) {
-            piece[1][i] = new Pawn(PieceColor.WHITE);
-            piece[6][i] = new Pawn(PieceColor.BLACK);
+            piece[1][i] = new Pawn(oppColor);
+            piece[6][i] = new Pawn(color);
         }
 
-        piece[0][0] = new Rook(PieceColor.WHITE, false);
-        piece[0][1] = new Knight(PieceColor.WHITE);
-        piece[0][2] = new Bishop(PieceColor.WHITE);
-        piece[0][3] = new Queen(PieceColor.WHITE);
-        piece[0][4] = new King(PieceColor.WHITE, false);
-        piece[0][5] = new Bishop(PieceColor.WHITE);
-        piece[0][6] = new Knight(PieceColor.WHITE);
-        piece[0][7] = new Rook(PieceColor.WHITE, false);
+        piece[0][0] = new Rook(oppColor, false);
+        piece[0][1] = new Knight(oppColor);
+        piece[0][2] = new Bishop(oppColor);
+        piece[0][3] = new Queen(oppColor);
+        piece[0][4] = new King(oppColor, false);
+        piece[0][5] = new Bishop(oppColor);
+        piece[0][6] = new Knight(oppColor);
+        piece[0][7] = new Rook(oppColor, false);
 
-        piece[7][0] = new Rook(PieceColor.BLACK, false);
-        piece[7][1] = new Knight(PieceColor.BLACK);
-        piece[7][2] = new Bishop(PieceColor.BLACK);
-        piece[7][3] = new Queen(PieceColor.BLACK);
-        piece[7][4] = new King(PieceColor.BLACK, false);
-        piece[7][5] = new Bishop(PieceColor.BLACK);
-        piece[7][6] = new Knight(PieceColor.BLACK);
-        piece[7][7] = new Rook(PieceColor.BLACK, false);
+        piece[7][0] = new Rook(color, false);
+        piece[7][1] = new Knight(color);
+        piece[7][2] = new Bishop(color);
+        piece[7][3] = new Queen(color);
+        piece[7][4] = new King(color, false);
+        piece[7][5] = new Bishop(color);
+        piece[7][6] = new Knight(color);
+        piece[7][7] = new Rook(color, false);
     }
 
     public boolean isWithinBounds(Position position) {

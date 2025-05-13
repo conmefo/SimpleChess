@@ -8,25 +8,6 @@ public  enum PieceType {
     QUEEN,
     KING;
 
-    public String getDisplayName() {
-        switch (this) {
-            case PAWN:
-                return "Pawn";
-            case ROOK:
-                return "Rook";
-            case KNIGHT:
-                return "Knight";
-            case BISHOP:
-                return "Bishop";
-            case QUEEN:
-                return "Queen";
-            case KING:
-                return "King";
-            default:
-                throw new IllegalArgumentException("Unknown piece type: " + this);
-        }
-    }
-
     public boolean isPawn() {
         return this == PAWN;
     }
@@ -49,5 +30,29 @@ public  enum PieceType {
 
     public boolean isKing() {
         return this == KING;
+    }
+
+    public String getDisplayName() {
+        if (this == QUEEN){
+            return "Queen";
+        }
+
+        if (this == KING){
+            return "King";
+        }
+
+        if (this == BISHOP){
+            return "Bishop";
+        }
+
+        if (this == ROOK){
+            return "Rook";
+        }
+
+        if (this == PAWN){
+            return "Pawn";
+        }
+
+        return "Knight";
     }
 } 
